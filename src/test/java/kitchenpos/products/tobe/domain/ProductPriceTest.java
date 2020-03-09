@@ -19,7 +19,7 @@ class ProductPriceTest {
     @NullSource
     void create1(BigDecimal price) {
         // when, then
-        assertThatThrownBy(() -> new ProductPrice(price))
+        assertThatThrownBy(() -> ProductPrice.of(price))
                 .isExactlyInstanceOf(IllegalArgumentException.class)
                 .hasMessage("상품의 가격은 0원 이상이어야만 한다.");
     }
@@ -29,7 +29,7 @@ class ProductPriceTest {
     @ValueSource(longs = {-1_000L, -2_000L, -3_000L})
     void create2(long price) {
         // when, then
-        assertThatThrownBy(() -> new ProductPrice(BigDecimal.valueOf(price)))
+        assertThatThrownBy(() -> ProductPrice.of(BigDecimal.valueOf(price)))
                 .isExactlyInstanceOf(IllegalArgumentException.class)
                 .hasMessage("상품의 가격은 0원 이상이어야만 한다.");
     }
@@ -37,7 +37,7 @@ class ProductPriceTest {
     @DisplayName("상품의 가격을 설정한다.")
     @Test
     void create3() {
-        assertThatCode(() -> new ProductPrice(BigDecimal.valueOf(1_000L)))
+        assertThatCode(() -> ProductPrice.of(BigDecimal.valueOf(1_000L)))
                 .doesNotThrowAnyException();
     }
 }

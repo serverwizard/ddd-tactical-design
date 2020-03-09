@@ -18,7 +18,7 @@ class ProductTest {
     @ValueSource(strings = {"", " ", "   "})
     void create1(String name) {
         // when, then
-        assertThatThrownBy(() -> new Product(name, BigDecimal.valueOf(1_000)))
+        assertThatThrownBy(() -> Product.from(name, BigDecimal.valueOf(1_000)))
                 .isExactlyInstanceOf(IllegalArgumentException.class)
                 .hasMessage("상품은 이름을 가져야만 한다.");
     }
@@ -27,7 +27,7 @@ class ProductTest {
     @Test
     void create2() {
         // when, then
-        assertThatCode(() -> new Product("양념치킨", BigDecimal.valueOf(1_000L)))
+        assertThatCode(() -> Product.from("양념치킨", BigDecimal.valueOf(1_000L)))
                 .doesNotThrowAnyException();
     }
 }

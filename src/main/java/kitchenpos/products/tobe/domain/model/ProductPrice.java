@@ -16,9 +16,13 @@ public class ProductPrice {
     protected ProductPrice() {
     }
 
-    public ProductPrice(BigDecimal price) {
+    private ProductPrice(BigDecimal price) {
         validatePriceNotNullAndGreaterThanZero(price);
         this.price = price;
+    }
+
+    public static ProductPrice of(BigDecimal price) {
+        return new ProductPrice(price);
     }
 
     private void validatePriceNotNullAndGreaterThanZero(BigDecimal price) {

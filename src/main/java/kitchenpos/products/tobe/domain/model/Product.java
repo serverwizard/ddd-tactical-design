@@ -20,11 +20,15 @@ public class Product {
     public Product() {
     }
 
-    public Product(String name, BigDecimal price) {
+    private Product(String name, BigDecimal price) {
         validateNameNotNull(name);
 
         this.name = name;
-        this.price = new ProductPrice(price);
+        this.price = ProductPrice.of(price);
+    }
+
+    public static Product from(String name, BigDecimal price) {
+        return new Product(name, price);
     }
 
     private void validateNameNotNull(String name) {
